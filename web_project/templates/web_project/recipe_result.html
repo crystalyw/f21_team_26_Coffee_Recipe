@@ -1,0 +1,61 @@
+{% extends "web_project/base.html" %}
+
+{% block content %}
+
+<div class="row min-vh-100">
+
+    <!-- left col: checkbox filter -->
+    <div class="col-sm-2 dark-blue">
+        <br/>
+        <div id="filters" class="pl-3">
+            {% for missing in filter %}
+            <div>
+                <input type="checkbox" value="missing_{{missing}}" id="{{missing}}" checked/>
+                <label for="{{missing}}">Missing {{missing}}</label>  
+            </div>
+            
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- right col: result display -->
+    <div class="col-sm-10" id="result">
+        <br/>
+        {% for r in available_recipe %}
+            <div id="recipe" class="ml-3 card shadow w-75 missing_{{r.miss_count}}">
+                <span class="card-body">
+                    <div class="media w-100">
+                        <img class="card-img w-25" src="../../static/web_project/image/make.png" alt="Card image">
+                        <div class="ml-3 media-body">
+                            <div class="title-font">{{r.recipe.recipe_name}}</div>
+                            <div class="desc-font">Category: {{r.recipe.category}}</div>
+                            <div class="desc-font">{{r.recipe.time_cost}} min</div>
+                            <span id="missCount" class="float-right notice-font">
+                                Missing {{r.miss_count}} ingredients:
+                                {% if r.missing_ls != None %}
+                                    {{r.missing_ls}}
+                                {% else %}
+                                    None
+                                {% endif %}
+                            </span>
+                        </div>
+                        
+                    </div>
+                    <a href="{% url 'recipe' r.recipe.id %}" class="stretched-link"></a>
+                </span>
+            </div>
+            <br/>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    // update checkbox result on result page
+    $("#filters :checkbox").click(function(){
+        $("#result div").hide();
+        $("#filters :checkbox:checked").each(function(){
+            $("." + $(this).val()).show();
+            $("." + $(this).val()).find('*').show();
+        })
+    })
+</script>
+{% endblock%}

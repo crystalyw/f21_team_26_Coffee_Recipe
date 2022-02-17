@@ -1,0 +1,39 @@
+{% extends "web_project/base.html" %}
+
+{% block pre_login %}
+<!-- navbar item goes here, refer to the base to create items -->
+    <div id="id_header_div" class="bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-custom">
+            <div class="navbar-brand">
+                <img class="rounded w-50" src="../../static/web_project/image/brand.png"/>
+            </div>
+            <ul class="nav navbar-nav align-items-end ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="id_nav_register" href="{% url 'register' %}">Register</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock%}
+
+{% block content %}
+<div class="container align-items-center min-vh-100">
+    <div id="login-card" class="card p-3 w-50 align-self-center mx-auto shadow">
+        <h2 id = "id_page_name" class="card-title">LOGIN</h2>
+        <form method="post" action="{% url 'login' %}" class="text-center">
+            {%  if message %}
+                <div>
+                    {{ message }}
+                </div>
+            {%  endif %}
+            <table>
+                {{ form }}
+            </table>
+            {% csrf_token %}
+            <button type="submit float-right" id="id_login_button" class="btn dark-grey btn-sm mt-3">Submit</button>
+            <br/><br/><br/>
+            <img class="rounded w-50" src="../../static/web_project/image/login.png"/>
+        </form>
+    </div>
+</div>
+{% endblock%}

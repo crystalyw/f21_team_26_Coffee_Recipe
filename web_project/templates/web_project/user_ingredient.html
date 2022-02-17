@@ -1,0 +1,132 @@
+{% extends "web_project/base.html" %}
+
+{% block content %}
+<!-- Ingredient page has different background color -->
+<div class="light-shade">
+    <div class="dark-shade-1">
+        <div class="row w-100">
+            <!-- left col: add ingredient -->
+            <div class="container min-vh-100 col-sm-3 dark-blue p-3">
+                <div class="pt-2">
+                    <h5>Add Ingredient</h5>
+                </div>
+                <div id="add-ingredient-form" class="form-horizontal">
+                    <!-- dropdown for ingredients -->
+                    <div class="form-group">
+                        <label for="ingredients-select">Choose an Ingredient</label>
+                        <select id="ingredients-select" name="ingredients" class="form-control" required>
+                            <option value="" selected disabled>Please select</option>
+                            {% for i in ingredients %}
+                                <option value="{{i.id}}">{{i.ingredient_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- numeric input for quantity -->
+                    <div class="form-group">
+                        <label for="quantity">Quantity </label>
+                        <!-- remember to check that the input quantity cannot be 0 -->
+                        <input type="number" step="0.01" class="form-control" id="quantity" min="0"/>
+                    </div>
+
+                    <!-- dropdown for measurements -->
+                    <div class="form-group">
+                        <label for="unit-select">Choose an Unit of Measurement</label>
+                        <select id="unit-select" name="units" class="form-control" required>
+                            <option value="" selected disabled>Please select</option>
+                            {% for u in units %}
+                                {% if u == " " %}
+                                <option value="{{u}}">no unit</option>
+                                {% else %}
+                                <option value="{{u}}">{{u}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button class="btn dark-grey" onclick="addIngredient()">Submit</button>
+                    <br/><br/>
+                    <!-- button to search base on ingredients on hand -->
+                    <div>
+                        <a class="btn dark-grey float-left mr-5" href="{% url 'result' %}">See what I can make!</a>
+                    </div>
+                    <div id="error" class="container float justify-content-center"></div>
+                    <br/><br/><br/>
+                    <p>*Hover on each ingredient to see its quantity.</p>
+                </div>
+            </div>
+
+            <!-- right col: user ingredient display -->
+            <div id="ingredientList" class="container min-vh-100 row col-sm-9  p-3  light-shade"></div>
+            <br/><br/><br/>
+        </div>
+    </div>
+</div>
+
+
+<!-- The popup modal -->
+<div class="modal fade" id="edit-modal" role="dialog" aria-labelledby="edit-modal-lable" aria-hidden="true">
+    <div class="modal-dialog modal-md no-bg" role="document">
+        <div class="modal-content">
+            <!-- header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="edit-modal-lable">Edit Existing Ingredient</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                <span aria-hidden="true">&times;</span>
+            </div>
+
+            <!-- body -->
+            <div class="modal-body ">
+                <div id="edit-ingredient-form" class="form-horizontal">
+                    <!-- numeric input for quantity -->
+                    <div class="form-group">
+                        <label for="quantity">Quantity </label>
+                        <!-- remember to check that the input quantity cannot be 0 -->
+                        <input type="number" step="0.01" class="form-control" id="edit-quantity" min="0"/>
+                    </div>
+
+                    <!-- dropdown for measurements -->
+                    <div class="form-group">
+                        <label for="unit-select">Choose an Unit of Measurement</label>
+                        <select id="edit-unit-select" name="units" class="form-control">
+                            <option value="" selected disabled>Please select</option>
+                            {% for u in units %}
+                                {% if u == " " %}
+                                <option value="no">no unit</option>
+                                {% else %}
+                                <option value="{{u}}">{{u}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="delete" class="btn float-left" data-dismiss="modal" onclick="deleteIngredient(openModalIngredient)">Delete</button>
+                <button id="save" class="btn float-right" data-dismiss="modal" onclick="updateIngredient(openModalIngredient)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = getList;
+    window.setInterval(getList, 5000)
+    window.setInterval(cleanError, 5000)
+
+    let openModalIngredient = null;
+    $('#edit-modal').on('show.bs.modal', function (e) {
+        openModalIngredient = $(e.relatedTarget).attr('data-userIngredient') // Button that triggered the modal
+        
+        // $("#save").click(function(){
+        //     console.log('hi')
+  	    //     updateIngredient(userIngredientID);
+        // });
+        // $("#delete").click(function(){
+  	    //     deleteIngredient(userIngredientID);
+        // });
+
+    })
+    
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "web_project/base.html" %}
+
+{% block pre_login %}
+    <!-- navbar item goes here, refer to the base to create items -->
+    <div id="id_header_div" class="bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-custom">
+            <div class="navbar-brand">
+                <img class="rounded w-50" src="../../static/web_project/image/brand.png"/>
+            </div>
+            <ul class="nav navbar-nav align-items-end ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="id_nav_login" href="{% url 'login' %}">Login</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="container align-items-center min-vh-100">
+    <div id="login-card" class="card p-3 w-50 align-self-center mx-auto shadow">
+        <h2 id = "id_page_name" class="card-title">REGISTER</h2>
+        <form method="post" action="{% url 'register' %}" class="text-center">
+            <table>
+                {% csrf_token %}
+                {% for field in form.visible_fields %}
+                    <tr>
+                        <td>{{ field.label_tag }}</td>
+                        <td>{{ field }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="error"><!--TODO add Class error-->
+                            {% for error in field.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <button type="submit" id="id_register_button" class="btn dark-grey btn-sm mt-3">Submit</button>
+            <br/><br/><br/>
+            <img class="rounded w-50" src="../../static/web_project/image/register.png"/>
+        </form>
+        {% for error in form.non_field_errors %}
+        <p class="error">
+            {{ error }}
+        </p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock%}

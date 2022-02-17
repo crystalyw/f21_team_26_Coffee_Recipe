@@ -1,0 +1,190 @@
+/* Created by Vivian */
+  /* some settings */
+    html, body {
+      font-size: 24px;
+      height: 100vh;
+      background-color: #fff6ea;
+      color:#473c38
+    } 
+
+    .tab {
+      margin-left: 40px;
+    }
+
+    .italic {
+      font-family: Verdana, sans-serif;
+      font-style: italic;
+    }
+
+    .error {
+      font-size: x-large;
+      color:red;
+    }
+
+    .float {
+      position:absolute; 
+      z-index:9999;
+      font-size: large;
+    }
+
+    .square{
+      font-size: small;
+      height: 2rem;
+    }
+
+    .card-font {
+      font-size: 1vw;
+      color: white;
+    }
+
+    .card-img-overlay {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position:absolute;
+      padding: 1vw;
+      border-radius: 2vw;
+    }
+  
+  /* font size */
+  .title-font {
+    font-size: 2vw;
+  }
+
+  .desc-font {
+    font-size: 1.5vw;
+  }
+
+  .notice-font {
+    font-size: 1vw;
+  }
+
+  /* div color */
+    .white {
+      background-color: white;
+    }
+
+    .no-bg {
+      background-color: white;
+      color:#473c38;
+    }
+
+    .light-shade {
+      background-color: #fff6ea;
+      color:#473c38
+    }
+
+    .dark-blue {
+      /* background-color: #c86c34; */
+      background-color: #52718d;
+      color:white;
+    }
+
+    .dark-grey {
+      background-color: #293039;
+      color: white;
+    }
+
+    .dark-shade-1 {
+      background-color: #52473d;
+      color:#fff6ea;
+    }
+
+    .dark-shade-2 {
+      background-color: #473c38;
+      color:#fff6ea;
+    }
+
+    .search-bg {
+      background-image: url('../image/search-bg.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 80vw;
+
+    }
+
+    #login-card {
+      background-image: url('../image/2.png');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+  /* for customizing navbar */
+    .navbar-custom {
+      background-color: #fff6ea;
+      align-items: flex-end;
+      padding-inline: 2rem;
+      background-image: url("../image/nav-bg.png");
+      background-size:cover;
+    }
+
+    .navbar-brand {
+      width: 20vw;
+    }
+
+    .pad-len {
+      padding-top: 5%;
+    }
+
+    /* change the brand and text color */
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-text{
+        color: #ffffff;
+    }
+    .navbar-custom .navbar-nav .nav-link{
+      color: #ba9063;
+      padding: 0;
+      margin: 0;
+      vertical-align: bottom;
+      padding-inline: 1rem;
+
+    }
+    /* change the color of active or hovered links */
+    .navbar-custom .nav-item.active .nav-link,
+    .navbar-custom .nav-item:hover .nav-link {
+        color: #473c38;
+    }
+    .nav-font{
+      font-size: medium;
+    }
+
+    .nav-tabs li a{
+      color: #52473d !important;
+      font-style:italic;
+      font-weight: 600;
+      }
+
+    .footer {
+      position: relative;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      margin-bottom: 0px;
+    }
+
+    .jumbotron{
+      background-image: url('../image/jumbotron.png');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 20vw;
+      color:white;
+      align-self: center;
+      display: flex;
+      align-items: center;
+    }
+
+/* Created by Crystal */
+
+ /* .search{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+} */
+
+
+
+/* Created by */

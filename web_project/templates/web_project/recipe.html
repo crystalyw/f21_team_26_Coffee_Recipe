@@ -1,0 +1,66 @@
+{% extends "web_project/base.html" %}
+
+{% block content %}
+
+
+<div class="light-shade min-vh-100">
+    <div id="id_page_name" class="jumbotron text-center p-4 title-font">
+        <span class="align-self-center mx-auto">
+            <b>
+                Recipe for {{recipe.recipe_name}}
+            </b>
+            {% if saved %}
+                <form method="POST" action="{% url 'unsave-recipe' recipe.id  %}">
+                    <input type="submit" id="unsave" class="btn light-shade" value="Unsave">
+                    {% csrf_token %}
+                </form>
+            {% else %}
+                <form method="POST" action="{% url 'save-recipe' recipe.id  %}">
+                    <input type="submit" id="save" class="btn light-shade" value="Save">
+                    {% csrf_token %}
+                </form>
+            {% endif %}
+        </span>
+    </div>
+
+    <div class="light-shade m-3 row">
+        <div class="col-sm-3">
+            <div class="dark-blue p-3 card">
+                <div class="card-title title-font">Ingredient List</div>
+                <ul>
+                    {% for item in ingredients %}
+
+                        <li class=" desc-font">{{item}}
+                            {% if item.ingredient_quantity != None %}
+                                {{item.ingredient_quantity}}
+                            {% endif %}
+                            {% if item.ingredient_unit != None %}
+                                {{item.ingredient_unit}}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <br/>
+                <hr />
+                <img class="rounded w-25" src="../../static/web_project/image/timer.png"/>
+                <span class="desc-font">{{recipe.time_cost}} minutes</span>
+            </div>
+        </div>
+
+        <div class="col-sm-9 desc-font">
+            {% for s in steps %}
+                <div>STEP {{s}}</div>
+                <hr />
+            {% endfor %}
+            <div id="recipe_video_div"></div>
+            <a href="{% url 'map' %}" class="btn dark-grey">Where to buy ingredients?</a>
+        </div>
+    </div>
+</div>
+<script>
+    const recipeName = "{{recipe.recipe_name}}";
+    const YoutubeAPIKey = "{{YouTubeAPIKey}}"
+    window.onload = embedRecipeYoutubeVideo;
+</script>
+{%endblock%}
+

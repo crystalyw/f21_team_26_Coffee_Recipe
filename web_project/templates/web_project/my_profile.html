@@ -1,0 +1,74 @@
+{% extends "web_project/base.html" %}
+
+{% block content %}
+<div class="pt-3 m-3 min-vh-100">
+    <!-- Nav pills -->
+    <ul class="nav nav-tabs nav-justified" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active text-left" data-toggle="pill" href="#profile-info">My Profile</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-left " data-toggle="pill" href="#fav-recipe">Saved Recipes</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content white min-vh-100">
+        <div id="profile-info" class="container-fluid tab-pane active"><br/><br/>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-center h-100">
+                        {% if profile.profile_pic %}
+                            <img class="rounded w-75" id="my_pic" src="../../static/web_project/image/profile-bg.png"/>
+                            <img class="rounded w-50 card-img-overlay my-auto align-self-center mx-auto" id="my_pic" src="{% url 'photo' profile.id %}" width="200px"/>
+                        {% else %}
+                            <img class="rounded  w-75" id="my_pic" src="../../static/web_project/image/profile-bg.png"/>
+                            <img class="rounded w-50 card-img-overlay my-auto align-self-center mx-auto" id="my_pic" src="../../static/web_project/image/default.png" width="200px"/>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form class="" enctype="multipart/form-data" method="POST" action="{% url 'my-profile' %}">
+                        <table>
+                            <tr>
+                                <td class="w-50 p-5">
+                                    {{form}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="btn btn-secondary" id="id_update_profile_button" type="submit">
+                                </td>
+                            </tr>
+                        </table>
+                        {% csrf_token %}
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="fav-recipe" class="container-fluid tab-pane h-100"><br>
+            <h4>Saved Recipes</h4>
+            <div class="row">
+                {% for r in saved_recipe %}
+                <div class="col-sm-2">
+                    <div class="card text-center h-100 shadow-sm">
+                        <img class="card-img" src="../../static/web_project/image/recipe-bg.png" alt="Card image">
+                        <div class="card-img-overlay h-100">
+                            <div class="card-font">
+                                {{r.recipe_name}}
+                            </div>
+                        </div>
+                        <a href="{% url 'recipe' r.id %}" class="stretched-link"></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            
+        </div>
+        <br/>
+    </div>
+        
+</div>
+{% endblock %}

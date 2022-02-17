@@ -1,0 +1,17 @@
+{% extends "web_project/base.html" %}
+
+{% block content %}
+
+<div class="container ">
+    <div id="id_page_name" class="align-items-center min-vh-100 row justify-content-md-center">
+        <img class="pt-5 align-self-center mx-auto rounded w-25" id="spinner" src="../../static/web_project/image/loading.gif"/>
+        <!--Google map-->
+        <div class="align-items-center justify-content-md-center pt-5">
+            <iframe id="map_iframe" width="950px" height="600px" class="border-0" loading="lazy" allowfullscreen
+                onload="document.getElementById('spinner').style.display='none';"
+                src="https://www.google.com/maps/embed/v1/search?q=supermarkets+convenience+stores+in+{{user.profile.zipcode}}+{{user.profile.city}}+{{user.profile.country}}&key={{GoogleAPIKey}}"></iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock%}
